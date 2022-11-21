@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PruebaMuseoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARTISTA">
+          <Key>
+            <PropertyRef Name="id_artista" />
+          </Key>
+          <Property Name="id_artista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombres_artista" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos_artista" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="genero_artista" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechanacimiento_artista" Type="datetime" Nullable="false" />
+          <Property Name="descripcion_artista" Type="nvarchar(max)" />
+          <Property Name="fechacreacion_artista" Type="datetime" Nullable="false" />
+          <Property Name="estado_artista" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nacionalidad_artista" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CONTENIDO">
+          <Key>
+            <PropertyRef Name="id_contenido" />
+          </Key>
+          <Property Name="id_contenido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imagen_contenido" Type="image" />
+          <Property Name="titulo_contenido" Type="nvarchar(max)" />
+          <Property Name="descripcion_contenido" Type="nvarchar(max)" />
+          <Property Name="fechacreacion_contenido" Type="datetime" />
+          <Property Name="artista_contenido" Type="int" />
+          <Property Name="estado_contenido" Type="nvarchar" MaxLength="50" />
+          <Property Name="visitas_contenido" Type="int" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detalle_estado" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EVENTO">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="int" Nullable="false" />
+          <Property Name="titulo_evento" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_evento" Type="nvarchar(max)" />
+          <Property Name="fechacreacion_evento" Type="datetime" Nullable="false" />
+          <Property Name="estado_evento" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechainicio_evento" Type="datetime" />
+          <Property Name="fechatermino_evento" Type="datetime" />
+          <Property Name="participantes_evento" Type="int" />
+        </EntityType>
+        <EntityType Name="EXPOSICION">
+          <Key>
+            <PropertyRef Name="id_exposicion" />
+          </Key>
+          <Property Name="id_exposicion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="referencia_exposicion" Type="int" Nullable="false" />
+          <Property Name="titulo_exposicion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_exposicion" Type="nvarchar(max)" />
+          <Property Name="fechacreacion_exposicion" Type="datetime" Nullable="false" />
+          <Property Name="estado_exposicion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="visitas" Type="int" />
+          <Property Name="fechainicio_exposicion" Type="datetime" Nullable="false" />
+          <Property Name="fechatermino_exposicion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EXPOSICION_CONTENIDO">
+          <Key>
+            <PropertyRef Name="id_exposicion_contenido" />
+          </Key>
+          <Property Name="id_exposicion_contenido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="exposicion" Type="int" Nullable="false" />
+          <Property Name="contenido" Type="int" Nullable="false" />
+          <Property Name="fechacreacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="id_genero" />
+          </Key>
+          <Property Name="id_genero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="detalle_genero" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="NOTICIA">
+          <Key>
+            <PropertyRef Name="id_noticia" />
+          </Key>
+          <Property Name="id_noticia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="imagen_noticia" Type="image" Nullable="false" />
+          <Property Name="titulo_noticia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_noticia" Type="nvarchar(max)" />
+          <Property Name="fechacreacion_noticia" Type="datetime" Nullable="false" />
+          <Property Name="estado_noticia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="visitas" Type="int" />
+        </EntityType>
+        <EntityType Name="SOLICITUD">
+          <Key>
+            <PropertyRef Name="id_solicitud" />
+          </Key>
+          <Property Name="id_solicitud" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre_solicitante" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="apellido_solicitante" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_solicitud" Type="nvarchar(max)" />
+          <Property Name="evento_solicitud" Type="int" Nullable="false" />
+          <Property Name="correo_solicitud" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="celular_solicitud" Type="int" Nullable="false" />
+          <Property Name="estado" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="estadopendiente_solicitud" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecharespuesta_solicitud" Type="datetime" />
+          <Property Name="fechacreacion_solicitud" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="nombres_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="genero_usuario" Type="nvarchar" MaxLength="50" />
+          <Property Name="fechanacimiento_usuario" Type="datetime" Nullable="false" />
+          <Property Name="descripcion_usuario" Type="nvarchar(max)" />
+          <Property Name="rol_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechacreacion_usuario" Type="datetime" Nullable="false" />
+          <Property Name="estado_usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CONTENIDO_ARTISTA">
+          <End Role="ARTISTA" Type="Self.ARTISTA" Multiplicity="0..1" />
+          <End Role="CONTENIDO" Type="Self.CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTISTA">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="CONTENIDO">
+              <PropertyRef Name="artista_contenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO">
+          <End Role="CONTENIDO" Type="Self.CONTENIDO" Multiplicity="1" />
+          <End Role="EXPOSICION" Type="Self.EXPOSICION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENIDO">
+              <PropertyRef Name="id_contenido" />
+            </Principal>
+            <Dependent Role="EXPOSICION">
+              <PropertyRef Name="referencia_exposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO_CONTENIDO">
+          <End Role="CONTENIDO" Type="Self.CONTENIDO" Multiplicity="1" />
+          <End Role="EXPOSICION_CONTENIDO" Type="Self.EXPOSICION_CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENIDO">
+              <PropertyRef Name="id_contenido" />
+            </Principal>
+            <Dependent Role="EXPOSICION_CONTENIDO">
+              <PropertyRef Name="contenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO_EXPOSICION">
+          <End Role="EXPOSICION" Type="Self.EXPOSICION" Multiplicity="1" />
+          <End Role="EXPOSICION_CONTENIDO" Type="Self.EXPOSICION_CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXPOSICION">
+              <PropertyRef Name="id_exposicion" />
+            </Principal>
+            <Dependent Role="EXPOSICION_CONTENIDO">
+              <PropertyRef Name="exposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_EVENTO">
+          <End Role="EVENTO" Type="Self.EVENTO" Multiplicity="1" />
+          <End Role="SOLICITUD" Type="Self.SOLICITUD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTO">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="SOLICITUD">
+              <PropertyRef Name="evento_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PruebaMuseoModelStoreContainer">
+          <EntitySet Name="ARTISTA" EntityType="Self.ARTISTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CONTENIDO" EntityType="Self.CONTENIDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ESTADO" EntityType="Self.ESTADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EVENTO" EntityType="Self.EVENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPOSICION" EntityType="Self.EXPOSICION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EXPOSICION_CONTENIDO" EntityType="Self.EXPOSICION_CONTENIDO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GENERO" EntityType="Self.GENERO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOTICIA" EntityType="Self.NOTICIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SOLICITUD" EntityType="Self.SOLICITUD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CONTENIDO_ARTISTA" Association="Self.FK_CONTENIDO_ARTISTA">
+            <End Role="ARTISTA" EntitySet="ARTISTA" />
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO" Association="Self.FK_EXPOSICION_CONTENIDO">
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+            <End Role="EXPOSICION" EntitySet="EXPOSICION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO_CONTENIDO" Association="Self.FK_EXPOSICION_CONTENIDO_CONTENIDO">
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+            <End Role="EXPOSICION_CONTENIDO" EntitySet="EXPOSICION_CONTENIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO_EXPOSICION" Association="Self.FK_EXPOSICION_CONTENIDO_EXPOSICION">
+            <End Role="EXPOSICION" EntitySet="EXPOSICION" />
+            <End Role="EXPOSICION_CONTENIDO" EntitySet="EXPOSICION_CONTENIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_EVENTO" Association="Self.FK_SOLICITUD_EVENTO">
+            <End Role="EVENTO" EntitySet="EVENTO" />
+            <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PruebaMuseoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PruebaMuseoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARTISTA" EntityType="PruebaMuseoModel.ARTISTA" />
+          <EntitySet Name="CONTENIDO" EntityType="PruebaMuseoModel.CONTENIDO" />
+          <EntitySet Name="ESTADO" EntityType="PruebaMuseoModel.ESTADO" />
+          <EntitySet Name="EVENTO" EntityType="PruebaMuseoModel.EVENTO" />
+          <EntitySet Name="EXPOSICION" EntityType="PruebaMuseoModel.EXPOSICION" />
+          <EntitySet Name="EXPOSICION_CONTENIDO" EntityType="PruebaMuseoModel.EXPOSICION_CONTENIDO" />
+          <EntitySet Name="GENERO" EntityType="PruebaMuseoModel.GENERO" />
+          <EntitySet Name="NOTICIA" EntityType="PruebaMuseoModel.NOTICIA" />
+          <EntitySet Name="SOLICITUD" EntityType="PruebaMuseoModel.SOLICITUD" />
+          <EntitySet Name="USUARIO" EntityType="PruebaMuseoModel.USUARIO" />
+          <AssociationSet Name="FK_CONTENIDO_ARTISTA" Association="PruebaMuseoModel.FK_CONTENIDO_ARTISTA">
+            <End Role="ARTISTA" EntitySet="ARTISTA" />
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO" Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO">
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+            <End Role="EXPOSICION" EntitySet="EXPOSICION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO_CONTENIDO" Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_CONTENIDO">
+            <End Role="CONTENIDO" EntitySet="CONTENIDO" />
+            <End Role="EXPOSICION_CONTENIDO" EntitySet="EXPOSICION_CONTENIDO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOLICITUD_EVENTO" Association="PruebaMuseoModel.FK_SOLICITUD_EVENTO">
+            <End Role="EVENTO" EntitySet="EVENTO" />
+            <End Role="SOLICITUD" EntitySet="SOLICITUD" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXPOSICION_CONTENIDO_EXPOSICION" Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_EXPOSICION">
+            <End Role="EXPOSICION" EntitySet="EXPOSICION" />
+            <End Role="EXPOSICION_CONTENIDO" EntitySet="EXPOSICION_CONTENIDO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ARTISTA">
+          <Key>
+            <PropertyRef Name="id_artista" />
+          </Key>
+          <Property Name="id_artista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombres_artista" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos_artista" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="genero_artista" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechanacimiento_artista" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="descripcion_artista" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_artista" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado_artista" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nacionalidad_artista" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CONTENIDO" Relationship="PruebaMuseoModel.FK_CONTENIDO_ARTISTA" FromRole="ARTISTA" ToRole="CONTENIDO" />
+        </EntityType>
+        <EntityType Name="CONTENIDO">
+          <Key>
+            <PropertyRef Name="id_contenido" />
+          </Key>
+          <Property Name="id_contenido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imagen_contenido" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="titulo_contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_contenido" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_contenido" Type="DateTime" Precision="3" />
+          <Property Name="artista_contenido" Type="Int32" />
+          <Property Name="estado_contenido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visitas_contenido" Type="Int32" />
+          <NavigationProperty Name="ARTISTA" Relationship="PruebaMuseoModel.FK_CONTENIDO_ARTISTA" FromRole="CONTENIDO" ToRole="ARTISTA" />
+          <NavigationProperty Name="EXPOSICION" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO" FromRole="CONTENIDO" ToRole="EXPOSICION" />
+          <NavigationProperty Name="EXPOSICION_CONTENIDO" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_CONTENIDO" FromRole="CONTENIDO" ToRole="EXPOSICION_CONTENIDO" />
+        </EntityType>
+        <EntityType Name="ESTADO">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detalle_estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EVENTO">
+          <Key>
+            <PropertyRef Name="id_evento" />
+          </Key>
+          <Property Name="id_evento" Type="Int32" Nullable="false" />
+          <Property Name="titulo_evento" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_evento" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_evento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado_evento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechainicio_evento" Type="DateTime" Precision="3" />
+          <Property Name="fechatermino_evento" Type="DateTime" Precision="3" />
+          <Property Name="participantes_evento" Type="Int32" />
+          <NavigationProperty Name="SOLICITUD" Relationship="PruebaMuseoModel.FK_SOLICITUD_EVENTO" FromRole="EVENTO" ToRole="SOLICITUD" />
+        </EntityType>
+        <EntityType Name="EXPOSICION">
+          <Key>
+            <PropertyRef Name="id_exposicion" />
+          </Key>
+          <Property Name="id_exposicion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="referencia_exposicion" Type="Int32" Nullable="false" />
+          <Property Name="titulo_exposicion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_exposicion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_exposicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado_exposicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visitas" Type="Int32" />
+          <Property Name="fechainicio_exposicion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechatermino_exposicion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CONTENIDO" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO" FromRole="EXPOSICION" ToRole="CONTENIDO" />
+          <NavigationProperty Name="EXPOSICION_CONTENIDO" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_EXPOSICION" FromRole="EXPOSICION" ToRole="EXPOSICION_CONTENIDO" />
+        </EntityType>
+        <EntityType Name="EXPOSICION_CONTENIDO">
+          <Key>
+            <PropertyRef Name="id_exposicion_contenido" />
+          </Key>
+          <Property Name="id_exposicion_contenido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="exposicion" Type="Int32" Nullable="false" />
+          <Property Name="contenido" Type="Int32" Nullable="false" />
+          <Property Name="fechacreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CONTENIDO1" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_CONTENIDO" FromRole="EXPOSICION_CONTENIDO" ToRole="CONTENIDO" />
+          <NavigationProperty Name="EXPOSICION1" Relationship="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_EXPOSICION" FromRole="EXPOSICION_CONTENIDO" ToRole="EXPOSICION" />
+        </EntityType>
+        <EntityType Name="GENERO">
+          <Key>
+            <PropertyRef Name="id_genero" />
+          </Key>
+          <Property Name="id_genero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="detalle_genero" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NOTICIA">
+          <Key>
+            <PropertyRef Name="id_noticia" />
+          </Key>
+          <Property Name="id_noticia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="imagen_noticia" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="titulo_noticia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_noticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_noticia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado_noticia" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="visitas" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SOLICITUD">
+          <Key>
+            <PropertyRef Name="id_solicitud" />
+          </Key>
+          <Property Name="id_solicitud" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="nombre_solicitante" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="apellido_solicitante" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion_solicitud" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="evento_solicitud" Type="Int32" Nullable="false" />
+          <Property Name="correo_solicitud" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="celular_solicitud" Type="Int32" Nullable="false" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="estadopendiente_solicitud" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fecharespuesta_solicitud" Type="DateTime" Precision="3" />
+          <Property Name="fechacreacion_solicitud" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EVENTO" Relationship="PruebaMuseoModel.FK_SOLICITUD_EVENTO" FromRole="SOLICITUD" ToRole="EVENTO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="nombres_usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="apellidos_usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="genero_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechanacimiento_usuario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="descripcion_usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rol_usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechacreacion_usuario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="estado_usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CONTENIDO_ARTISTA">
+          <End Type="PruebaMuseoModel.ARTISTA" Role="ARTISTA" Multiplicity="0..1" />
+          <End Type="PruebaMuseoModel.CONTENIDO" Role="CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTISTA">
+              <PropertyRef Name="id_artista" />
+            </Principal>
+            <Dependent Role="CONTENIDO">
+              <PropertyRef Name="artista_contenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO">
+          <End Type="PruebaMuseoModel.CONTENIDO" Role="CONTENIDO" Multiplicity="1" />
+          <End Type="PruebaMuseoModel.EXPOSICION" Role="EXPOSICION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENIDO">
+              <PropertyRef Name="id_contenido" />
+            </Principal>
+            <Dependent Role="EXPOSICION">
+              <PropertyRef Name="referencia_exposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO_CONTENIDO">
+          <End Type="PruebaMuseoModel.CONTENIDO" Role="CONTENIDO" Multiplicity="1" />
+          <End Type="PruebaMuseoModel.EXPOSICION_CONTENIDO" Role="EXPOSICION_CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONTENIDO">
+              <PropertyRef Name="id_contenido" />
+            </Principal>
+            <Dependent Role="EXPOSICION_CONTENIDO">
+              <PropertyRef Name="contenido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOLICITUD_EVENTO">
+          <End Type="PruebaMuseoModel.EVENTO" Role="EVENTO" Multiplicity="1" />
+          <End Type="PruebaMuseoModel.SOLICITUD" Role="SOLICITUD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTO">
+              <PropertyRef Name="id_evento" />
+            </Principal>
+            <Dependent Role="SOLICITUD">
+              <PropertyRef Name="evento_solicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXPOSICION_CONTENIDO_EXPOSICION">
+          <End Type="PruebaMuseoModel.EXPOSICION" Role="EXPOSICION" Multiplicity="1" />
+          <End Type="PruebaMuseoModel.EXPOSICION_CONTENIDO" Role="EXPOSICION_CONTENIDO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXPOSICION">
+              <PropertyRef Name="id_exposicion" />
+            </Principal>
+            <Dependent Role="EXPOSICION_CONTENIDO">
+              <PropertyRef Name="exposicion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PruebaMuseoModelStoreContainer" CdmEntityContainer="PruebaMuseoEntities">
+          <EntitySetMapping Name="ARTISTA">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.ARTISTA">
+              <MappingFragment StoreEntitySet="ARTISTA">
+                <ScalarProperty Name="nacionalidad_artista" ColumnName="nacionalidad_artista" />
+                <ScalarProperty Name="estado_artista" ColumnName="estado_artista" />
+                <ScalarProperty Name="fechacreacion_artista" ColumnName="fechacreacion_artista" />
+                <ScalarProperty Name="descripcion_artista" ColumnName="descripcion_artista" />
+                <ScalarProperty Name="fechanacimiento_artista" ColumnName="fechanacimiento_artista" />
+                <ScalarProperty Name="genero_artista" ColumnName="genero_artista" />
+                <ScalarProperty Name="apellidos_artista" ColumnName="apellidos_artista" />
+                <ScalarProperty Name="nombres_artista" ColumnName="nombres_artista" />
+                <ScalarProperty Name="id_artista" ColumnName="id_artista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CONTENIDO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.CONTENIDO">
+              <MappingFragment StoreEntitySet="CONTENIDO">
+                <ScalarProperty Name="visitas_contenido" ColumnName="visitas_contenido" />
+                <ScalarProperty Name="estado_contenido" ColumnName="estado_contenido" />
+                <ScalarProperty Name="artista_contenido" ColumnName="artista_contenido" />
+                <ScalarProperty Name="fechacreacion_contenido" ColumnName="fechacreacion_contenido" />
+                <ScalarProperty Name="descripcion_contenido" ColumnName="descripcion_contenido" />
+                <ScalarProperty Name="titulo_contenido" ColumnName="titulo_contenido" />
+                <ScalarProperty Name="imagen_contenido" ColumnName="imagen_contenido" />
+                <ScalarProperty Name="id_contenido" ColumnName="id_contenido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.ESTADO">
+              <MappingFragment StoreEntitySet="ESTADO">
+                <ScalarProperty Name="detalle_estado" ColumnName="detalle_estado" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.EVENTO">
+              <MappingFragment StoreEntitySet="EVENTO">
+                <ScalarProperty Name="participantes_evento" ColumnName="participantes_evento" />
+                <ScalarProperty Name="fechatermino_evento" ColumnName="fechatermino_evento" />
+                <ScalarProperty Name="fechainicio_evento" ColumnName="fechainicio_evento" />
+                <ScalarProperty Name="estado_evento" ColumnName="estado_evento" />
+                <ScalarProperty Name="fechacreacion_evento" ColumnName="fechacreacion_evento" />
+                <ScalarProperty Name="descripcion_evento" ColumnName="descripcion_evento" />
+                <ScalarProperty Name="titulo_evento" ColumnName="titulo_evento" />
+                <ScalarProperty Name="id_evento" ColumnName="id_evento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXPOSICION">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.EXPOSICION">
+              <MappingFragment StoreEntitySet="EXPOSICION">
+                <ScalarProperty Name="fechatermino_exposicion" ColumnName="fechatermino_exposicion" />
+                <ScalarProperty Name="fechainicio_exposicion" ColumnName="fechainicio_exposicion" />
+                <ScalarProperty Name="visitas" ColumnName="visitas" />
+                <ScalarProperty Name="estado_exposicion" ColumnName="estado_exposicion" />
+                <ScalarProperty Name="fechacreacion_exposicion" ColumnName="fechacreacion_exposicion" />
+                <ScalarProperty Name="descripcion_exposicion" ColumnName="descripcion_exposicion" />
+                <ScalarProperty Name="titulo_exposicion" ColumnName="titulo_exposicion" />
+                <ScalarProperty Name="referencia_exposicion" ColumnName="referencia_exposicion" />
+                <ScalarProperty Name="id_exposicion" ColumnName="id_exposicion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXPOSICION_CONTENIDO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.EXPOSICION_CONTENIDO">
+              <MappingFragment StoreEntitySet="EXPOSICION_CONTENIDO">
+                <ScalarProperty Name="fechacreacion" ColumnName="fechacreacion" />
+                <ScalarProperty Name="contenido" ColumnName="contenido" />
+                <ScalarProperty Name="exposicion" ColumnName="exposicion" />
+                <ScalarProperty Name="id_exposicion_contenido" ColumnName="id_exposicion_contenido" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GENERO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.GENERO">
+              <MappingFragment StoreEntitySet="GENERO">
+                <ScalarProperty Name="detalle_genero" ColumnName="detalle_genero" />
+                <ScalarProperty Name="id_genero" ColumnName="id_genero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOTICIA">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.NOTICIA">
+              <MappingFragment StoreEntitySet="NOTICIA">
+                <ScalarProperty Name="visitas" ColumnName="visitas" />
+                <ScalarProperty Name="estado_noticia" ColumnName="estado_noticia" />
+                <ScalarProperty Name="fechacreacion_noticia" ColumnName="fechacreacion_noticia" />
+                <ScalarProperty Name="descripcion_noticia" ColumnName="descripcion_noticia" />
+                <ScalarProperty Name="titulo_noticia" ColumnName="titulo_noticia" />
+                <ScalarProperty Name="imagen_noticia" ColumnName="imagen_noticia" />
+                <ScalarProperty Name="id_noticia" ColumnName="id_noticia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOLICITUD">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.SOLICITUD">
+              <MappingFragment StoreEntitySet="SOLICITUD">
+                <ScalarProperty Name="fechacreacion_solicitud" ColumnName="fechacreacion_solicitud" />
+                <ScalarProperty Name="fecharespuesta_solicitud" ColumnName="fecharespuesta_solicitud" />
+                <ScalarProperty Name="estadopendiente_solicitud" ColumnName="estadopendiente_solicitud" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="celular_solicitud" ColumnName="celular_solicitud" />
+                <ScalarProperty Name="correo_solicitud" ColumnName="correo_solicitud" />
+                <ScalarProperty Name="evento_solicitud" ColumnName="evento_solicitud" />
+                <ScalarProperty Name="descripcion_solicitud" ColumnName="descripcion_solicitud" />
+                <ScalarProperty Name="apellido_solicitante" ColumnName="apellido_solicitante" />
+                <ScalarProperty Name="nombre_solicitante" ColumnName="nombre_solicitante" />
+                <ScalarProperty Name="id_solicitud" ColumnName="id_solicitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="PruebaMuseoModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="estado_usuario" ColumnName="estado_usuario" />
+                <ScalarProperty Name="fechacreacion_usuario" ColumnName="fechacreacion_usuario" />
+                <ScalarProperty Name="rol_usuario" ColumnName="rol_usuario" />
+                <ScalarProperty Name="descripcion_usuario" ColumnName="descripcion_usuario" />
+                <ScalarProperty Name="fechanacimiento_usuario" ColumnName="fechanacimiento_usuario" />
+                <ScalarProperty Name="genero_usuario" ColumnName="genero_usuario" />
+                <ScalarProperty Name="apellidos_usuario" ColumnName="apellidos_usuario" />
+                <ScalarProperty Name="nombres_usuario" ColumnName="nombres_usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

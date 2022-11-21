@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c5db9dc285a0445eb2759998acb31232" Name="Diagram1">
+        <EntityTypeShape EntityType="PruebaMuseoModel.ARTISTA" Width="1.5" PointX="0.75" PointY="1.125" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.CONTENIDO" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.ESTADO" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.EVENTO" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.EXPOSICION" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.EXPOSICION_CONTENIDO" Width="1.5" PointX="7.5" PointY="1.5" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.GENERO" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.NOTICIA" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.SOLICITUD" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="PruebaMuseoModel.USUARIO" Width="1.5" PointX="9.75" PointY="0.75" />
+        <AssociationConnector Association="PruebaMuseoModel.FK_CONTENIDO_ARTISTA" />
+        <AssociationConnector Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO" />
+        <AssociationConnector Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_CONTENIDO" />
+        <AssociationConnector Association="PruebaMuseoModel.FK_SOLICITUD_EVENTO" />
+        <AssociationConnector Association="PruebaMuseoModel.FK_EXPOSICION_CONTENIDO_EXPOSICION" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
